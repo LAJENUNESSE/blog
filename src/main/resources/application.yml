@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: blog
+
+  # SQLite Database
+  datasource:
+    url: jdbc:sqlite:blog.db
+    driver-class-name: org.sqlite.JDBC
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+        format_sql: true
+
+  # Flyway
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+# JWT Configuration
+jwt:
+  # Base64 encoded 256-bit key (change in production!)
+  secret: ${JWT_SECRET:Y2xhdWRlLWJsb2ctand0LXNlY3JldC1rZXktMjU2LWJpdHMtbG9uZw==}
+  expiration: 86400000  # 24 hours in milliseconds
+  refresh-expiration: 604800000  # 7 days in milliseconds
+
+# Server Configuration
+server:
+  port: 8080
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.example.blog: DEBUG
+    org.springframework.security: DEBUG

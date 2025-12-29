@@ -1,0 +1,79 @@
+package com.example.blog.controller;
+
+import com.example.blog.common.PageResult;
+import com.example.blog.common.Result;
+import com.example.blog.dto.response.ArticleDTO;
+import com.example.blog.entity.Article;
+import com.example.blog.service.ArticleService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/articles")
+@RequiredArgsConstructor
+public class ArticleController {
+
+    private final ArticleService articleService;
+
+    @GetMapping
+    public Result<PageResult<ArticleDTO>> getPublishedArticles(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+        return Result.success(PageResult.of(articleService.getPublishedArticles(pageable)));
+    }
+
+    @GetMapping("/{id}")
+    public Result<ArticleDTO> getArticleById(@PathVariable Long id) {
+        ArticleDTO article = articleService.getArticleById(id);
+        if (article.getStatus().equals(Article.Status.PUBLISHED.name())) {
+            articleService.incrementViewCount(id);
+        }
+        return Result.success(article);
+    }
+
+    @GetMapping("/slug/{slug}")
+    public Result<ArticleDTO> getArticleBySlug(@PathVariable String slug) {
+        ArticleDTO article = articleService.getArticleBySlug(slug);
+        if (article.getStatus().equals(Article.Status.PUBLISHED.name())) {
+            articleService.incrementViewCount(article.getId());
+        }
+        return Result.success(article);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public Result<PageResult<ArticleDTO>> getArticlesByCategory(
+            @PathVariable Long categoryId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+        return Result.success(PageResult.of(articleService.getArticlesByCategory(categoryId, pageable)));
+    }
+
+    @GetMapping("/tag/{tagId}")
+    public Result<PageResult<ArticleDTO>> getArticlesByTag(
+            @PathVariable Long tagId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+        return Result.success(PageResult.of(articleService.getArticlesByTag(tagId, pageable)));
+    }
+
+    @GetMapping("/search")
+    public Result<PageResult<ArticleDTO>> searchArticles(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+        return Result.success(PageResult.of(articleService.searchArticles(keyword, pageable)));
+    }
+
+    @PostMapping("/{id}/like")
+    public Result<Void> likeArticle(@PathVariable Long id) {
+        articleService.incrementLikeCount(id);
+        return Result.success();
+    }
+}
