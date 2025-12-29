@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif;
+}
+
+/* Markdown 样式优化 */
+.prose pre {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.prose img {
+  @apply rounded-lg shadow-md;
+}
+
+/* 深色模式 */
+.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.dark .prose {
+  @apply prose-invert;
+}

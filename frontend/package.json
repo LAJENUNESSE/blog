@@ -1,0 +1,26 @@
+{
+  "name": "blog-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:web": "pnpm --filter @blog/web dev",
+    "dev:admin": "pnpm --filter @blog/admin dev",
+    "build:web": "pnpm --filter @blog/web build",
+    "build:admin": "pnpm --filter @blog/admin build",
+    "build": "pnpm -r build",
+    "preview:web": "pnpm --filter @blog/web preview",
+    "preview:admin": "pnpm --filter @blog/admin preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx --fix",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "eslint": "^9.17.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "prettier": "^3.4.2",
+    "typescript": "~5.7.2"
+  }
+}
