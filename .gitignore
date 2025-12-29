@@ -15,10 +15,15 @@ backend/.springBeans
 backend/.sts4-cache
 
 ### IntelliJ IDEA ###
+.idea/
 backend/.idea
 *.iws
 *.iml
 *.ipr
+
+### Database (root level) ###
+/*.db
+/*.sqlite
 
 ### NetBeans ###
 /nbproject/private/

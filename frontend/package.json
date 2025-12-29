@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev:web": "pnpm --filter @blog/web dev",
-    "dev:admin": "pnpm --filter @blog/admin dev",
-    "build:web": "pnpm --filter @blog/web build",
-    "build:admin": "pnpm --filter @blog/admin build",
-    "build": "pnpm -r build",
-    "preview:web": "pnpm --filter @blog/web preview",
-    "preview:admin": "pnpm --filter @blog/admin preview",
+    "dev:web": "npm run dev -w @blog/web",
+    "dev:admin": "npm run dev -w @blog/admin",
+    "build:web": "npm run build -w @blog/web",
+    "build:admin": "npm run build -w @blog/admin",
+    "build": "npm run build -ws",
+    "preview:web": "npm run preview -w @blog/web",
+    "preview:admin": "npm run preview -w @blog/admin",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx --fix",
     "format": "prettier --write ."
   },
