@@ -71,6 +71,8 @@ frontend/packages/shared/src/**/*.d.ts.map
 
 # Auto-generated component declarations
 frontend/packages/*/components.d.ts
+frontend/packages/*/src/components.d.ts
+frontend/packages/*/src/auto-imports.d.ts
 
 # Logs
 logs
