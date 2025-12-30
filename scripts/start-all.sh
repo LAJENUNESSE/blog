@@ -28,7 +28,7 @@ cd "$SCRIPT_DIR/../frontend"
 
 if [ ! -d "node_modules" ]; then
     echo "正在安装前端依赖..."
-    npm install
+    pnpm install
 fi
 
 npm run dev:web &

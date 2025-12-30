@@ -1,8 +1,16 @@
-import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios'
+import axios, { type AxiosInstance, type InternalAxiosRequestConfig, type AxiosRequestConfig } from 'axios'
 import { tokenStorage } from '../utils/storage'
 import { API_BASE_URL } from '../constants'
 
-const request: AxiosInstance = axios.create({
+// 由于响应拦截器返回 response.data，重新定义请求方法的返回类型
+export interface ApiInstance extends AxiosInstance {
+  get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T>
+  post<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>
+  put<T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>
+  delete<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T>
+}
+
+const request: ApiInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
   headers: {
