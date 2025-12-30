@@ -20,7 +20,27 @@ public class SpaController {
             "/category/**",
             "/tag/**"
     })
-    public String forward() {
+    public String forwardWeb() {
         return "forward:/index.html";
+    }
+
+    /**
+     * Forward admin routes to admin/index.html
+     */
+    @GetMapping(value = {
+            "/admin",
+            "/admin/",
+            "/admin/login",
+            "/admin/dashboard",
+            "/admin/articles",
+            "/admin/articles/**",
+            "/admin/categories",
+            "/admin/tags",
+            "/admin/comments",
+            "/admin/users",
+            "/admin/settings"
+    })
+    public String forwardAdmin() {
+        return "forward:/admin/index.html";
     }
 }

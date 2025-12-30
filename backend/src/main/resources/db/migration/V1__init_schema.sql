@@ -108,7 +108,7 @@ CREATE INDEX idx_comments_status ON comments(status);
 -- Insert default admin user (password: admin123)
 -- BCrypt hash generated for "admin123"
 INSERT INTO users (username, password, email, nickname, role, enabled)
-VALUES ('admin', '$2a$10$EqKcp1WFKVQISheBxkVJceXp37zHuPKjEbSs4Z8MwvshVjA7B44Kq', 'admin@example.com', 'Administrator', 'ADMIN', 1);
+VALUES ('admin', '$2a$12$AQ2HjKhio97JTePf0Tlsi./DDX9QwKW2dVm0hL7eQCr.d9ryXreWC', 'admin@example.com', 'Administrator', 'ADMIN', 1);
 
 -- Insert default settings
 INSERT INTO settings (key, value, description) VALUES ('site_title', 'My Blog', 'Site title');

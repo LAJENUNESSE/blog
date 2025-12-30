@@ -47,6 +47,9 @@ importers:
       bytemd:
         specifier: ^1.21.0
         version: 1.22.0
+      highlight.js:
+        specifier: ^11.10.0
+        version: 11.11.1
       naive-ui:
         specifier: ^2.41.0
         version: 2.43.2(vue@3.5.26(typescript@5.7.3))

@@ -1,4 +1,5 @@
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+// 单体部署时使用相对路径，开发时使用环境变量或默认值
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
 export const ARTICLE_STATUS = {
   DRAFT: '草稿',

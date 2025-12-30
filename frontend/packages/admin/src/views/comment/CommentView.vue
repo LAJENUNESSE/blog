@@ -16,7 +16,7 @@
   const message = useMessage()
   const loading = ref(false)
   const comments = ref<CommentDTO[]>([])
-  const statusFilter = ref<string | null>(null)
+  const statusFilter = ref<string>('')
   const pagination = ref({
     page: 1,
     pageSize: 10,
@@ -26,7 +26,7 @@
   })
 
   const statusOptions = [
-    { label: '全部', value: null },
+    { label: '全部', value: '' },
     { label: '待审核', value: 'PENDING' },
     { label: '已通过', value: 'APPROVED' },
     { label: '已拒绝', value: 'REJECTED' },

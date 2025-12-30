@@ -42,14 +42,19 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // Static resources (SPA frontend)
+                        // Static resources (SPA frontend - Web)
                         .requestMatchers("/", "/index.html").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/*.js", "/*.css", "/*.ico", "/*.png", "/*.svg").permitAll()
-                        // SPA routes (handled by Vue Router)
+                        // Static resources (SPA frontend - Admin)
+                        .requestMatchers("/admin", "/admin/", "/admin/index.html").permitAll()
+                        .requestMatchers("/admin/assets/**").permitAll()
+                        // SPA routes - Web (handled by Vue Router)
                         .requestMatchers("/login", "/register", "/about", "/search").permitAll()
                         .requestMatchers("/article/**", "/category/**", "/tag/**").permitAll()
-                        // Public endpoints
+                        // SPA routes - Admin (handled by Vue Router, auth checked by frontend)
+                        .requestMatchers("/admin/**").permitAll()
+                        // Public API endpoints
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/articles/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
@@ -59,7 +64,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/settings/**").permitAll()
                         // Uploads
                         .requestMatchers("/uploads/**").permitAll()
-                        // Admin endpoints
+                        // Admin API endpoints (requires ADMIN role)
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         // All other requests require authentication
                         .anyRequest().authenticated()

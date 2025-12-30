@@ -10,7 +10,6 @@
     NDropdown,
     NAvatar,
     NIcon,
-    NBadge,
   } from 'naive-ui'
   import type { MenuOption } from 'naive-ui'
   import { useAuthStore } from '@/stores'
